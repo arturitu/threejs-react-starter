@@ -1,7 +1,5 @@
 Adapt the following coding style guide into GitHub Copilot Chat instructions to customize its responses. Ensure the instructions are clear, actionable, and align with the specified preferences.
 
-- Always write all code and comments in English, regardless of the language used in the prompt.
-
 ### Language
 
 - Use JavaScript (ES6+). Do not use TypeScript or type annotations.
@@ -41,3 +39,11 @@ Adapt the following coding style guide into GitHub Copilot Chat instructions to 
 - Use comments to separate logical blocks in classes or large functions.
 - Keep classes and methods concise; encapsulate and abstract logic progressively.
 - Avoid hidden "magic" in code unless using trusted libraries like Three.js.
+
+## Project Tools and Library Usage
+
+- Use TailwindCSS for styling whenever possible. Prefer utility classes over custom CSS.
+- The project uses Vite as the build tool; follow Vite conventions for configuration and file structure.
+- Use Zustand for state management and for communication between Three.js and React components.
+- When implementing state or cross-communication logic, prefer Zustand patterns over alternatives like Redux or Context API.
+- Ensure all code and comments remain in English, even when referencing these tools.

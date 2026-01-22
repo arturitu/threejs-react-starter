@@ -4,6 +4,7 @@ import useStore from '../store/useStore'
 export default class GameEngine {
   constructor(container) {
     this.isRunning = true
+    this.gameEnded = useStore.getState().gameEnded
 
     this.container = container
 
@@ -51,6 +52,15 @@ export default class GameEngine {
         this.avatar.material.color.copy(newColor)
       },
     )
+
+    this.unsubscribeGameEnded = useStore.subscribe(
+      (state) => {
+        return state.gameEnded
+      },
+      (ended) => {
+        this.gameEnded = ended
+      },
+    )
   }
 
   setupListeners() {
@@ -73,21 +83,30 @@ export default class GameEngine {
     }
 
     window.addEventListener('resize', this.handleResize)
-    window.addEventListener('click', this.handleClick)
+    this.renderer.domElement.addEventListener('click', this.handleClick)
   }
 
   destroy = () => {
     window.removeEventListener('resize', this.handleResize)
-    window.removeEventListener('click', this.handleClick)
+    this.renderer.domElement.removeEventListener('click', this.handleClick)
+
     if (this.unsubscribeColor) {
       this.unsubscribeColor()
     }
+    if (this.unsubscribeGameEnded) {
+      this.unsubscribeGameEnded()
+    }
+
     this.renderer.setAnimationLoop(null)
     this.renderer.dispose()
     this.container.innerHTML = ''
   }
 
-  animate = (timestamp) => {
+  animate = () => {
+    if (this.gameEnded) {
+      return
+    }
+
     this.avatar.rotation.x += 0.01
     this.avatar.rotation.y += 0.01
     this.renderer.render(this.scene, this.camera)
