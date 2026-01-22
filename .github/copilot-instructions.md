@@ -1,5 +1,7 @@
 Adapt the following coding style guide into GitHub Copilot Chat instructions to customize its responses. Ensure the instructions are clear, actionable, and align with the specified preferences.
 
+- Always write all code and comments in English, regardless of the language used in the prompt.
+
 ### Language
 
 - Use JavaScript (ES6+). Do not use TypeScript or type annotations.
