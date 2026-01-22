@@ -5,7 +5,7 @@ const useStore = create(
   subscribeWithSelector(
     persist(
       (set) => ({
-        avatarColor: 'blue',
+        avatarColor: '0x2986cc',
         setAvatarColor: (color) => {
           set({ avatarColor: color })
         },

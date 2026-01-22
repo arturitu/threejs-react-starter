@@ -1,8 +1,11 @@
 import * as THREE from 'three'
+import useStore from '../store/useStore'
 
 export default class GameEngine {
   constructor(container) {
-    this.isRunning = false
+    this.isRunning = true
+
+    this.container = container
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -17,49 +20,76 @@ export default class GameEngine {
       1000,
     )
     this.camera.position.set(0, 0, 5)
+
     this.scene = new THREE.Scene()
+
+    this.raycaster = new THREE.Raycaster()
+    this.mouse = new THREE.Vector2()
+
     const geometry = new THREE.BoxGeometry()
     const material = new THREE.MeshBasicMaterial({
-      color: 0x00ff00,
-      wireframe: true,
+      color: new THREE.Color(parseInt(useStore.getState().avatarColor, 16)),
     })
-    this.cube = new THREE.Mesh(geometry, material)
+    this.avatar = new THREE.Mesh(geometry, material)
 
-    this.scene.add(this.cube)
+    this.scene.add(this.avatar)
 
+    this.setupStoreSubscriptions()
     this.setupListeners()
+
+    this.animate = this.animate.bind(this)
+    this.renderer.setAnimationLoop(this.animate)
+  }
+
+  setupStoreSubscriptions() {
+    this.unsubscribeColor = useStore.subscribe(
+      (state) => {
+        return state.avatarColor
+      },
+      (color) => {
+        const newColor = new THREE.Color(parseInt(color, 16))
+        this.avatar.material.color.copy(newColor)
+      },
+    )
   }
 
   setupListeners() {
-    window.addEventListener('resize', () => {
+    this.handleResize = () => {
       this.camera.aspect = window.innerWidth / window.innerHeight
       this.camera.updateProjectionMatrix()
       this.renderer.setSize(window.innerWidth, window.innerHeight)
-    })
-  }
-
-  start = () => {
-    if (this.isRunning) {
-      return
-    } else {
-      this.isRunning = true
-      this.animate()
     }
-  }
 
-  stop = () => {
-    this.isRunning = false
-  }
+    this.handleClick = (event) => {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
 
-  animate = () => {
-    if (!this.isRunning) {
-      return
-    } else {
-      this.cube.rotation.x += 0.01
-      this.cube.rotation.y += 0.01
-      this.renderer.render(this.scene, this.camera)
+      this.raycaster.setFromCamera(this.mouse, this.camera)
+      const intersects = this.raycaster.intersectObject(this.avatar)
 
-      requestAnimationFrame(this.animate)
+      if (intersects.length > 0) {
+        useStore.getState().setGameEnded(true)
+      }
     }
+
+    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('click', this.handleClick)
+  }
+
+  destroy = () => {
+    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('click', this.handleClick)
+    if (this.unsubscribeColor) {
+      this.unsubscribeColor()
+    }
+    this.renderer.setAnimationLoop(null)
+    this.renderer.dispose()
+    this.container.innerHTML = ''
+  }
+
+  animate = (timestamp) => {
+    this.avatar.rotation.x += 0.01
+    this.avatar.rotation.y += 0.01
+    this.renderer.render(this.scene, this.camera)
   }
 }

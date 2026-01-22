@@ -3,16 +3,16 @@ import GameEngine from '../engine/GameEngine'
 
 const GameCanvas = () => {
   const containerRef = useRef(null)
+  const GameEngineRef = useRef()
 
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const game = new GameEngine(container)
-    game.start()
+    GameEngineRef.current = new GameEngine(containerRef.current)
 
     return () => {
-      game.stop()
+      if (GameEngineRef.current) {
+        GameEngineRef.current.destroy()
+        GameEngineRef.current = null
+      }
     }
   }, [])
 

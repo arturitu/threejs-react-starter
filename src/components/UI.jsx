@@ -1,6 +1,54 @@
+import useStore from '../store/useStore'
+
 const UI = () => {
+  const avatarColor = useStore((state) => {
+    return state.avatarColor
+  })
+  const setAvatarColor = useStore((state) => {
+    return state.setAvatarColor
+  })
+  const gameEnded = useStore((state) => {
+    return state.gameEnded
+  })
+  const setGameEnded = useStore((state) => {
+    return state.setGameEnded
+  })
+
+  const colors = ['0x2986cc', '0xe67e22', '0xf1c40f', '0x2ecc71', '0xe74c3c']
+
+  const changeColor = () => {
+    const currentIndex = colors.indexOf(avatarColor)
+    const nextIndex = (currentIndex + 1) % colors.length
+    setAvatarColor(colors[nextIndex])
+  }
+
+  const resetGame = () => {
+    setGameEnded(false)
+  }
   return (
     <div className="relative min-h-screen p-8 flex flex-col gap-8 z-10">
+      <div className="flex flex-col gap-4 pointer-events-auto">
+        <button
+          onClick={changeColor}
+          className="bg-white px-4 py-2 rounded shadow-lg text-black font-bold uppercase transition-transform active:scale-95"
+        >
+          'Change Avatar Color'
+        </button>
+
+        {gameEnded && (
+          <div className="bg-brandDark p-6 rounded shadow-2xl flex flex-col items-center gap-4 border-2 border-brandOrange">
+            <h1 className="text-white font-serif font-black text-4xl italic">
+              'GAME ENDED'
+            </h1>
+            <button
+              onClick={resetGame}
+              className="bg-brandOrange text-white px-6 py-2 rounded font-bold"
+            >
+              'RESTART'
+            </button>
+          </div>
+        )}
+      </div>
       {/* Color palette blocks */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col items-center">
