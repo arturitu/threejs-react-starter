@@ -29,7 +29,7 @@ export default class GameEngine {
 
     const geometry = new THREE.BoxGeometry()
     const material = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(parseInt(useStore.getState().avatarColor, 16)),
+      color: new THREE.Color(useStore.getState().avatarColor),
     })
     this.avatar = new THREE.Mesh(geometry, material)
 
@@ -48,7 +48,7 @@ export default class GameEngine {
         return state.avatarColor
       },
       (color) => {
-        const newColor = new THREE.Color(parseInt(color, 16))
+        const newColor = new THREE.Color(color)
         this.avatar.material.color.copy(newColor)
       },
     )

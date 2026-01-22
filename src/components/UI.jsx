@@ -15,30 +15,34 @@ const UI = () => {
     return state.setGameEnded
   })
 
-  const colors = ['0x2986cc', '0xe67e22', '0xf1c40f', '0x2ecc71', '0xe74c3c']
+  const palette = [
+    { name: 'brandBlue', hex: '#304560', className: 'bg-brandBlue' },
+    { name: 'brandOrange', hex: '#ee552c', className: 'bg-brandOrange' },
+    { name: 'brandYellow', hex: '#ff9125', className: 'bg-brandYellow' },
+    { name: 'brandDark', hex: '#252e3d', className: 'bg-brandDark' },
+    { name: 'brandLightGray', hex: '#e5e5e5', className: 'bg-brandLightGray' },
+    {
+      name: 'brandExtraLight',
+      hex: '#f4f4f4',
+      className: 'bg-brandExtraLight',
+    },
+  ]
 
   const changeColor = () => {
-    const currentIndex = colors.indexOf(avatarColor)
-    const nextIndex = (currentIndex + 1) % colors.length
-    setAvatarColor(colors[nextIndex])
+    const currentIndex = palette.findIndex((color) => color.hex === avatarColor)
+    const nextIndex = (currentIndex + 1) % palette.length
+    setAvatarColor(palette[nextIndex].hex)
   }
 
   const resetGame = () => {
     setGameEnded(false)
   }
 
-  const palette = [
-    { name: 'brandOrange', className: 'bg-brandOrange' },
-    { name: 'brandYellow', className: 'bg-brandYellow' },
-    { name: 'brandDark', className: 'bg-brandDark' },
-    { name: 'brandLightGray', className: 'bg-brandLightGray' },
-    { name: 'brandExtraLight', className: 'bg-brandExtraLight' },
-    { name: 'brandBlue', className: 'bg-brandBlue' },
-  ]
+  // palette array is now unified above
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full flex flex-row items-start justify-between px-8 pt-6 pb-12 z-20 bg-gradient-to-b from-brandDark/80 to-brandDark/0 backdrop-blur-sm pointer-events-none">
+      <div className="fixed top-0 left-0 w-full flex flex-row items-start justify-between px-8 pt-6 pb-12 z-20 from-brandDark/80 to-brandDark/0 backdrop-blur-sm pointer-events-none">
         <div className="flex flex-col items-start gap-4">
           <span className="text-brandExtraLight text-xs font-bold tracking-widest uppercase opacity-70 ml-1">
             Color Scheme
@@ -51,7 +55,7 @@ const UI = () => {
                   className={
                     'w-6 h-6 rounded-full border border-white/10 ' +
                     color.className +
-                    (avatarColor === color.name
+                    (avatarColor === color.hex
                       ? ' ring-2 ring-white ring-offset-2 ring-offset-brandDark/40'
                       : '')
                   }
