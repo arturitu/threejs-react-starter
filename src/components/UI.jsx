@@ -15,16 +15,15 @@ const UI = () => {
   })
 
   const palette = [
-    { name: 'brandBlue', hex: '#304560', className: 'bg-brandBlue' },
-    { name: 'brandOrange', hex: '#ee552c', className: 'bg-brandOrange' },
-    { name: 'brandYellow', hex: '#ff9125', className: 'bg-brandYellow' },
-    { name: 'brandDark', hex: '#252e3d', className: 'bg-brandDark' },
-    { name: 'brandLightGray', hex: '#e5e5e5', className: 'bg-brandLightGray' },
+    { name: 'brandDark', hex: '#1b1b1b', className: 'bg-brandDark' },
+    { name: 'brandRed', hex: '#ee552c', className: 'bg-brandRed' },
     {
       name: 'brandExtraLight',
       hex: '#f4f4f4',
       className: 'bg-brandExtraLight',
     },
+    { name: 'brandLightGray', hex: '#e5e5e5', className: 'bg-brandLightGray' },
+    { name: 'brandGray', hex: '#ff9125', className: 'bg-brandGray' },
   ]
 
   const changeColor = () => {
@@ -84,7 +83,7 @@ const UI = () => {
         <div className="fixed bottom-10 left-1/2 -translate-x-1/2 flex justify-center z-30">
           <button
             onClick={changeColor}
-            className="px-8 py-4 rounded-full bg-brandOrange text-white font-black tracking-widest uppercase shadow-lg hover:scale-105 active:scale-95 transition-all border border-white/20 text-sm"
+            className="px-8 py-4 rounded-full bg-brandRed text-white font-black tracking-widest uppercase shadow-lg hover:scale-105 active:scale-95 transition-all border border-white/20 text-sm"
           >
             Change Color
           </button>
@@ -94,7 +93,7 @@ const UI = () => {
       {gameEnded && (
         <div className="fixed inset-0 flex items-center justify-center z-40 bg-brandDark/60 backdrop-blur-xl">
           <div className="relative w-full max-w-sm bg-brandDark/90 rounded-3xl shadow-2xl flex flex-col items-center gap-8 border border-white/10 p-10 overflow-hidden">
-            <div className="absolute -top-16 -right-16 w-32 h-32 bg-brandOrange/20 blur-2xl rounded-full" />
+            <div className="absolute -top-16 -right-16 w-32 h-32 bg-brandRed/20 blur-2xl rounded-full" />
             <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-brandBlue/20 blur-2xl rounded-full" />
 
             <h1 className="text-white font-serif font-black text-4xl italic drop-shadow-2xl text-center z-10">
@@ -103,7 +102,7 @@ const UI = () => {
 
             <button
               onClick={resetGame}
-              className="w-full py-4 rounded-xl bg-brandOrange text-white font-black text-lg tracking-wide shadow-xl hover:brightness-110 active:scale-95 transition-all z-10 uppercase"
+              className="w-full py-4 rounded-xl bg-brandRed text-white font-black text-lg tracking-wide shadow-xl hover:brightness-110 active:scale-95 transition-all z-10 uppercase"
             >
               Restart
             </button>

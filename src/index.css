@@ -4,12 +4,11 @@
   --font-sans: 'Roboto', sans-serif;
   --font-serif: 'Playfair Display', serif;
 
-  --color-brandOrange: #ee552c;
-  --color-brandYellow: #ff9125;
-  --color-brandDark: #252e3d;
-  --color-brandLightGray: #e5e5e5;
-  --color-brandExtraLight: #f4f4f4;
-  --color-brandBlue: #304560;
+  --color-brandDark: #32292f;
+  --color-brandRed: #c52233;
+  --color-brandExtraLight: #e6efed;
+  --color-brandLightGray: #ccdce0;
+  --color-brandGray: #817891;
 }
 
 html,
