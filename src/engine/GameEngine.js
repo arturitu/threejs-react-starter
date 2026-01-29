@@ -18,7 +18,7 @@ export default class GameEngine {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000,
+      1000
     )
     this.camera.position.set(0, 0, 5)
 
@@ -50,7 +50,7 @@ export default class GameEngine {
       (color) => {
         const newColor = new THREE.Color(color)
         this.avatar.material.color.copy(newColor)
-      },
+      }
     )
 
     this.unsubscribeGameEnded = useStore.subscribe(
@@ -59,7 +59,7 @@ export default class GameEngine {
       },
       (ended) => {
         this.gameEnded = ended
-      },
+      }
     )
   }
 

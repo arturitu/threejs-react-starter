@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import useStore from '../store/useStore'
 
 const UI = () => {
@@ -70,7 +69,7 @@ const UI = () => {
             Typography
           </span>
           <div className="font-serif font-medium text-lg tracking-wide">
-            Playfair Medium 500
+            Playfair Medium 700
           </div>
           <div className="font-sans font-bold text-sm tracking-widest">
             Roboto Bold 700

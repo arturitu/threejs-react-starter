@@ -21,9 +21,9 @@ const useStore = create(
             avatarColor: state.avatarColor,
           }
         },
-      },
-    ),
-  ),
+      }
+    )
+  )
 )
 
 export default useStore
