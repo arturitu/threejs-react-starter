@@ -4,11 +4,11 @@
   --font-sans: 'Roboto', sans-serif;
   --font-serif: 'Playfair Display', serif;
 
-  --color-brandDark: #32292f;
-  --color-brandRed: #c52233;
-  --color-brandExtraLight: #e6efed;
-  --color-brandLightGray: #ccdce0;
-  --color-brandGray: #817891;
+  --color-brandDark: #1b1b1b;
+  --color-brandRed: #ee552c;
+  --color-brandExtraLight: #f4f4f4;
+  --color-brandLightGray: #e5e5e5;
+  --color-brandGray: #ff9125;
 }
 
 html,
@@ -27,10 +27,10 @@ html {
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(
     to bottom,
     var(--color-brandDark),
-    var(--color-brandBlue)
+    var(--color-brandRed)
   );
 }

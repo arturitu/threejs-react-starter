@@ -93,8 +93,8 @@ const UI = () => {
       {gameEnded && (
         <div className="fixed inset-0 flex items-center justify-center z-40 bg-brandDark/60 backdrop-blur-xl">
           <div className="relative w-full max-w-sm bg-brandDark/90 rounded-3xl shadow-2xl flex flex-col items-center gap-8 border border-white/10 p-10 overflow-hidden">
-            <div className="absolute -top-16 -right-16 w-32 h-32 bg-brandRed/20 blur-2xl rounded-full" />
-            <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-brandBlue/20 blur-2xl rounded-full" />
+            <div class="absolute -top-16 -right-16 w-32 h-32 bg-brandRed/20 blur-2xl rounded-full" />
+            <div class="absolute -bottom-16 -left-16 w-32 h-32 bg-brandRed/10 blur-2xl rounded-full" />
 
             <h1 className="text-white font-serif font-black text-4xl italic drop-shadow-2xl text-center z-10">
               Game ended

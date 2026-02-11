@@ -103,12 +103,11 @@ export default class GameEngine {
   }
 
   animate = () => {
-    if (this.gameEnded) {
-      return
+    if (!this.gameEnded) {
+      this.avatar.rotation.x += 0.01
+      this.avatar.rotation.y += 0.01
     }
 
-    this.avatar.rotation.x += 0.01
-    this.avatar.rotation.y += 0.01
     this.renderer.render(this.scene, this.camera)
   }
 }
